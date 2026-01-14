@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Churn Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-gray-900 min-h-screen text-white">
+
+    <nav class="flex justify-between items-center px-10 py-5 bg-black/40">
+        <h1 class="text-2xl font-bold text-red-500">CHURN<span class="text-white">AI</span></h1>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center text-center mt-20 px-6">
+
+        <h1 class="text-5xl font-bold mb-4">AI Customer Churn Predictor</h1>
+        <p class="text-gray-400 mb-10">Predict which customer will leave before it happens</p>
+
+        <form action="/predict" method="post" class="bg-white p-6 rounded-lg text-black space-y-4 w-full max-w-xl">
+
+            <input name="tenure" type="number" placeholder="Tenure (months)" class="w-full p-2 border rounded" required>
+
+            <input name="MonthlyCharges" type="number" step="0.01" placeholder="Monthly Charges"
+                class="w-full p-2 border rounded" required>
+
+            <input name="TotalCharges" type="number" step="0.01" placeholder="Total Charges"
+                class="w-full p-2 border rounded" required>
+
+            <select name="Contract" class="w-full p-2 border rounded">
+                <option>Month-to-month</option>
+                <option>One year</option>
+                <option>Two year</option>
+            </select>
+
+            <select name="InternetService" class="w-full p-2 border rounded">
+                <option>DSL</option>
+                <option>Fiber optic</option>
+                <option>No</option>
+            </select>
+
+            <button class="bg-red-500 text-white w-full py-2 rounded font-bold">
+                Predict Churn
+            </button>
+
+        </form>
+
+        {% if result %}
+        <div class="mt-8 px-6 py-3 rounded-lg 
+{% if 'High' in result %} bg-red-500 {% else %} bg-green-500 {% endif %}">
+            {{ result }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
